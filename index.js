@@ -199,6 +199,9 @@ elemanlara denk gelecek şekilde, iki diziyi birleştirip sonucu manav dizisine 
 
 var manav;
 
+//manav = meyveler.concat(sebzeler);
+manav = [...meyveler, ...sebzeler];
+
 /* 	GÖREV 4:
 		Yeni kurulmuş bir mesajlaşma startup firması atılan mesajları emojilerle zenginleştirmek istiyor. 
     Bunun için emojiler adında bir nesne tanımlamışlar. Kullanıcının gönderdiği mesaj stringi içinde 
@@ -216,9 +219,52 @@ var manav;
 			4. elde edilen string döndürülecek
  */
 
-function emojileriDonustur(/* kodlar buraya */) {
-  /* kodlar buraya */
+const foxTestSentence =
+  "The quick:) brown fox:d jumps over the lazy dog <3. :D If :p the dog :P reacted, was it really lazy? :o :O";
+
+function emojileriDonustur(message, emojilerObj) {
+  let emojiliMesaj = message;
+  for (const shortcut in emojilerObj) {
+    // console.log(`${shortcut}: ${emojilerObj[shortcut]}`);
+    emojiliMesaj = emojiliMesaj.replaceAll(shortcut, emojilerObj[shortcut]);
+    emojiliMesaj = emojiliMesaj.replaceAll(
+      shortcut.toUpperCase(),
+      emojilerObj[shortcut]
+    );
+  }
+
+  return emojiliMesaj;
 }
+
+/* regexli cözüm
+let emojiliMesaj = message;
+  for (const shortcut in emojilerObj){
+    console.log(`$(shortcut): ${emojilerObj[shortcut]}`);
+    
+    const regex = new RegExp(shortcut, "gi");
+
+    emojiliMesaj = emojiliMesaj.replaceAll(regex, emojilerObj[shortcut]);
+  }
+  return emojiliMesaj;
+
+*/
+
+/*
+  let emojiliMesaj = message.replaceAll(":)", "🙂");
+  emojiliMesaj = emojiliMesaj.replaceAll(":( ", "😔");
+  emojiliMesaj = emojiliMesaj.replaceAll(":d", "😁");
+  emojiliMesaj = emojiliMesaj.replaceAll(":d".toUpperCase(), "😁");
+  emojiliMesaj = emojiliMesaj.replaceAll(":p", "😛");
+  emojiliMesaj = emojiliMesaj.replaceAll(":p".toUpperCase(), "😛");
+  emojiliMesaj = emojiliMesaj.replaceAll(":o", "😱");
+  emojiliMesaj = emojiliMesaj.replaceAll(":o".toUpperCase(), "😱");
+  emojiliMesaj = emojiliMesaj.replaceAll("<3", "❤️");
+
+  return emojiliMesaj;
+}
+
+  */
+console.log("Görev 4:", emojileriDonustur(foxTestSentence, emojiler));
 
 /*  Bu satırın aşağısındaki kodları lütfen değiştirmeyin  */
 function sa() {
